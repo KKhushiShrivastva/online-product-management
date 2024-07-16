@@ -1,0 +1,71 @@
+<template>
+    <div class="container mt-5">
+      <h2>Product List</h2>
+      <button class="btn btn-primary mb-3" @click="goToCreateProduct">Add New Product</button>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="product in products" :key="product.id">
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>
+                <button class="btn btn-sm btn-warning" @click="editProduct(product.id)">Edit</button>
+                <button class="btn btn-sm btn-danger" @click="deleteProduct(product.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+  
+  <script>
+  import axios from 'axios';
+import { Inertia } from '@inertiajs/inertia';
+  export default {
+    data() {
+      return {
+        products: []
+      };
+    },
+    methods: {
+      fetchProducts() {
+        axios.get('/api/products').then(response => {
+            console.log(response);
+          this.products = response.data.products;
+        }).catch(error => {
+
+          console.error('There was an error fetching the products:', error);
+        });
+      },
+      goToCreateProduct() {
+      Inertia.visit('/products/create');
+    },
+    editProduct(id) {
+      Inertia.visit(`/products/${id}/edit`);
+    },
+    deleteProduct(id) {
+      axios.delete(`/api/products/${id}`).then(response => {
+        this.products = this.products.filter(product => product.id !== id);
+      }).catch(error => {
+        console.error('There was an error deleting the product:', error);
+      });
+    }
+    },
+    mounted() {
+      this.fetchProducts();
+    }
+  };
+  </script>
+  
+  <style scoped>
+  .container {
+    max-width: 800px;
+  }
+  </style>
+  
