@@ -26,6 +26,12 @@ import { Head } from '@inertiajs/vue3';
         </div>
         
         <div class="mb-3">
+          <label for="description" class="form-label">Image Preview</label>
+          <img v-if="imagePreview" :src="imagePreview" alt="Preview">
+          <img src="/product_image/default_image.png" alt="" srcset="" width="200" v-else>
+        </div>
+        
+        <div class="mb-3">
           <label for="product_image" class="form-label">Product Image</label>
           <input type="file" class="form-control" id="product_image" @change="handleFileChange" />
         </div>
@@ -59,14 +65,25 @@ export default {
         product_image: '',
         stock: '',
       },
-
+      imagePreview: null, 
     };
   },
   methods: {
     handleFileChange(event) {
       console.log("image: ", event.target.files[0]);
-      this.localProduct.product_image = event.target.files[0];
+      const file = event.target.files[0];
+      if (file) {
+        this.localProduct.product_image = file;
+        this.createImagePreview(file);
+      }
     },
+    createImagePreview(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imagePreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }, 
     fetchProduct(productId) {
       console.log(productId);
 
