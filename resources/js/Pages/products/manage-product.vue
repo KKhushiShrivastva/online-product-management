@@ -1,4 +1,10 @@
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head } from '@inertiajs/vue3';
+</script>
+  
 <template>
+    <AuthenticatedLayout>
     <div class="container mt-5">
       <h2>Product List</h2>
       <button class="btn btn-primary mb-3" @click="goToCreateProduct">Add New Product</button>
@@ -14,14 +20,15 @@
           <tr v-for="product in products" :key="product.id">
             <td>{{ product.name }}</td>
             <td>{{ product.price }}</td>
-            <td>
-                <button class="btn btn-sm btn-warning" @click="editProduct(product.id)">Edit</button>
+            <td> 
+                <button class="btn btn-sm btn-warning" @click="editProduct(product.id)">Edit</button> 
                 <button class="btn btn-sm btn-danger" @click="deleteProduct(product.id)">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+  </AuthenticatedLayout>
   </template>
   
   <script>
@@ -47,6 +54,7 @@ import { Inertia } from '@inertiajs/inertia';
       Inertia.visit('/products/create');
     },
     editProduct(id) {
+      console.log("id: ",id);
       Inertia.visit(`/products/${id}/edit`);
     },
     deleteProduct(id) {

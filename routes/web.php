@@ -18,26 +18,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Products Routes of view inertia
-    Route::get('/manage-product', [ProductController::class, 'manageProduct'])->name('manage-product');
-    // Route::get('/products/{id}/edit', [ProductController::class, 'editProducts'])->name('edit-product');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    
-
-    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
    
 
-    //  API endpoint
-    Route::get('/api/products', [ProductController::class, 'getProducts']); 
-    Route::get('/api/products', [ProductController::class, 'getProducts']);
-    Route::delete('/api/products/{id}', [ProductController::class, 'deleteProduct']);
+Route::get('/manage-product', [ProductController::class, 'manageProduct'])->name('manage-product');
 
-    Route::post('/api/products', [ProductController::class, 'store']);
-    Route::put('/api/products/{id}', [ProductController::class, 'update']);
-    Route::get('/api/products/{id}', [ProductController::class, 'show']);
+Route::get('/products/create', [ProductController::class, 'createProduct'])->name('create-product');
 
-    Route::get('/products/create', [ProductController::class, 'createProduct'])->name('create-product');
+Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('edit-product');
+    
 
 });
 
