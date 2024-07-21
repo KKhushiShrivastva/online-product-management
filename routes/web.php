@@ -7,7 +7,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
 
-Route::get('/', [FrontendController::class, 'index'])->name('profile.edit');
+// Route::get('/', [FrontendController::class, 'index'])->name('profile.edit');
+Route::get('/',  function () {
+    return redirect('/manage-product');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -26,7 +29,7 @@ Route::get('/products/create', [ProductController::class, 'createProduct'])->nam
 
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('edit-product');
     
-Route::get('/products/{id}', [ProductController::class, 'show']);
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('show-product');
 
 });
 

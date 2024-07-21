@@ -40,9 +40,22 @@ import { Head } from '@inertiajs/vue3';
   <div class="card-body">
     <div class="mb-3">
       <label for="description" class="form-label">Image Preview</label>
-      <img v-if="imagePreview" :src="imagePreview" alt="Preview" class="img-fluid mb-3">
-      <img src="/product_image/default_image.png" alt="Default Image" class="img-fluid mb-3" width="200" v-else>
-
+      <!-- {{ localProduct }} -->
+        
+      <!-- <img src="/product_image/default_image.png" alt="Default Image" class="img-fluid mb-3" width="200"  > -->
+      <img v-if="localProduct.product_image"
+    :src="'/product_image/'+localProduct.product_image || defaultImageUrl"
+    alt="Product Image"
+    class="img-fluid mb-3"
+    width="200"
+  />
+  <img v-else
+    :src="'/product_image/'+defaultImageUrl"
+    alt="Product Image"
+    class="img-fluid mb-3"
+    width="200"
+  />
+      
       <h5 class="card-title">{{ localProduct.name }}</h5>
       <p class="card-subtitle mb-2 text-muted">{{ localProduct.description }}</p>
       <h4 class="card-subtitle mb-2 text-muted">{{ localProduct.price }}</h4>
@@ -75,6 +88,7 @@ export default {
         stock: '',
       },
       imagePreview: null, 
+      defaultImageUrl: '/default_image.png', 
     };
   },
   methods: {
@@ -93,6 +107,7 @@ export default {
       const reader = new FileReader();
       reader.onload = (e) => {
         this.imagePreview = e.target.result;
+        console.log("image: ",  imagePreview);
       };
       reader.readAsDataURL(file);
     }, 
@@ -137,9 +152,9 @@ export default {
     
   },
   mounted() {
-  console.log("mounted:", this.product);
+  console.log("mounted:", this.localProduct);
   if (this.product) {
-    this.localProduct = { ...this.product, product_image: null };
+    this.localProduct = { ...this.product };
   }
 }
 };
