@@ -117,11 +117,12 @@ export default {
     })
     .then((response) => {
       this.$swal({
-          title: 'Success',
-          text: 'Product Updated Successfully!.',
-          icon: 'success',
-        });           
-      Inertia.visit('/manage-product');
+            title: 'Success',
+            text: 'Product Updated Successfully!',
+            icon: 'success',
+          }).then(() => {
+            Inertia.visit('/manage-product');
+          });
     })
     .catch((error) => {
       console.error('There was an error updating the product:', error);

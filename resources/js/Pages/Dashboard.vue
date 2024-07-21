@@ -19,23 +19,27 @@ import { Head } from '@inertiajs/vue3';
         <div class="container mt-5">
             <div class="row"><div class="col-4">
                 <div class="card">
+                    <a :href="'/profile'">
                     <div class="card-body">
 
                         <h5 class="card-title"></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Total Users</h6>
-                        <p class="btn btn-secondary">10</p>
+                        <p class="btn btn-secondary">{{userCount}}</p>
                     </div>
+                    </a>
                 </div>
 
             </div>
             <div class="col-4">
                 <div class="card">
+                    <a :href="'/manage-product'">
                     <div class="card-body">
 
                         <h5 class="card-title"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Total Products</h6>
-                        <p class="btn btn-secondary">27</p>
+                        <h6 class="card-subtitle mb-2 text-muted"> Total Products</h6>
+                        <p class="btn btn-secondary">{{prodCount   }}</p>
                     </div>
+                </a>
                 </div>
 
             </div>
@@ -46,7 +50,7 @@ import { Head } from '@inertiajs/vue3';
 
                         <h5 class="card-title"></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Products in stock</h6>
-                        <p class="btn btn-secondary">1</p>
+                        <p class="btn btn-secondary">{{prod_in_stock_count}}</p>
                     </div>
                 </div>
 
@@ -67,6 +71,32 @@ import { Head } from '@inertiajs/vue3';
         </div> -->
     </AuthenticatedLayout>
 </template>
+
+<script>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import axios from 'axios';
+import { Inertia } from '@inertiajs/inertia';
+
+export default {
+  props: {
+    prodCount: {
+      type: Number,
+      required: true,
+    },
+    userCount: {
+      type: Number,
+      required: true,
+    },
+    prod_in_stock_count:{
+        type: Number,
+      required: true,
+    }
+  },
+};
+</script>
+
 <style>
 .card-subtitle{
     font-size:  14px;

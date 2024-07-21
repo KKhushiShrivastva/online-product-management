@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Product;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProductController;
@@ -13,7 +16,17 @@ Route::get('/',  function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $user_count = User::count();
+    $prod_count = Product::count();
+    $prod_in_stock_count = Product::where('stock', '>' ,1)->count();
+    Log::info($user_count);
+    Log::info($prod_count);
+
+    return Inertia::render('Dashboard', [
+        'userCount' => $user_count,
+        'prodCount' => $prod_count,
+        'prod_in_stock_count' => $prod_in_stock_count,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

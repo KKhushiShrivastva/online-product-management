@@ -20,7 +20,7 @@ class ProductController extends Controller
 
     public function getProducts()
     {
-        $products = Product::get();
+        $products = Product::orderBy('created_at','desc')->get();
         return response()->json(['products' => $products]);
     }
 

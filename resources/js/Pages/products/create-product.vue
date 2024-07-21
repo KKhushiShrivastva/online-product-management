@@ -84,11 +84,12 @@ export default {
           },
         });
         this.$swal({
-          title: 'Success',
-          text: 'product added successfully!.',
-          icon: 'success',
-        });
-        Inertia.visit('/manage-product');
+            title: 'Success',
+            text: 'Product Added  Successfully!',
+            icon: 'success',
+          }).then(() => {
+            Inertia.visit('/manage-product');
+          });
       } catch (error) {
         console.error('There was an error creating the product:', error);
       }
