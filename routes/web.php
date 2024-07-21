@@ -26,6 +26,7 @@ Route::get('/products/create', [ProductController::class, 'createProduct'])->nam
 
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('edit-product');
     
+Route::get('/products/{id}', [ProductController::class, 'show']);
 
 });
 

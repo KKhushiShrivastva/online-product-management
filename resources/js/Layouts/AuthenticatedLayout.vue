@@ -33,7 +33,7 @@ const showingNavigationDropdown = ref(false);
                                     Dashboard
                                 </NavLink>
 
-                                <NavLink :href="route('manage-product') || route('create-product') || route('products-edit')" :active="route().current('manage-product')">
+                                <NavLink :href="route('manage-product') || route('create-product') || route('edit-product') || route('show-product')" :active="route().current('manage-product') || route().current('create-product') || route().current('edit-product') || route().current('show-product')">
                                     Manage Product              
                                 </NavLink>
                             </div>
@@ -141,11 +141,11 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
+            <!-- <header class="bg-white shadow" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
-            </header>
+            </header> -->
 
             <!-- Page Content -->
             <main>

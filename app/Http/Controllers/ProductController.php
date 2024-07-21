@@ -102,12 +102,14 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    public function show($id)
+  public function show($id)
     {
         $product = Product::findOrFail($id);
-        return response()->json($product);
+        Log::info($product);
+        return Inertia::render('products/show-product', [
+            'product' => $product,
+        ]);
     }
-
     public function deleteProduct($id)
     {
         $product = Product::findOrFail($id);

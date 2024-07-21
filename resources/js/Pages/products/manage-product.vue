@@ -25,8 +25,10 @@ import { Head } from '@inertiajs/vue3';
             <td>{{ product.name }}</td>
             <td>{{ product.price }}</td>
             <td>
-              <button class="btn btn-sm btn-warning" @click="editProduct(product.id)">Edit</button>
-              <button class="btn btn-sm btn-danger" @click="deleteProduct(product.id)">Delete</button>
+              <button class="btn btn-sm btn-warning mgn" @click="editProduct(product.id)">Edit</button>
+              <button class="btn btn-sm btn-danger mgn" @click="deleteProduct(product.id)">Delete</button>
+              <button class="btn btn-sm btn-info mgn" @click="viewProduct(product.id)">View Product</button>
+
             </td>
           </tr>
         </tbody>
@@ -61,6 +63,9 @@ export default {
       console.log("id: ", id);
       Inertia.visit(`/products/${id}/edit`);
     },
+    viewProduct(id) {
+      Inertia.visit(`/products/${id}`);
+    },
     deleteProduct(id) {
       axios.delete(`/api/products/${id}`).then(response => {
         this.products = this.products.filter(product => product.id !== id);
@@ -89,5 +94,11 @@ export default {
 <style scoped>
 .container {
   max-width: 800px;
+}
+.container {
+  max-width: 800px;
+}
+.mgn{
+  margin-right:  10px;
 }
 </style>
