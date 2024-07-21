@@ -23,7 +23,7 @@ import { Head } from '@inertiajs/vue3';
               <img :src="'/product_image/' + getImageName(product.product_image)" alt="" srcset="" width="100">
             </td>
             <td>{{ product.name }}</td>
-            <td>{{ product.price }}</td>
+            <td>₹{{ product.price }}</td>
             <td>
               <button class="btn btn-sm btn-warning mgn" @click="editProduct(product.id)">Edit</button>
               <button class="btn btn-sm btn-danger mgn" @click="deleteProduct(product.id)">Delete</button>
