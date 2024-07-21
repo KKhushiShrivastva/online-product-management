@@ -66,13 +66,45 @@ export default {
     viewProduct(id) {
       Inertia.visit(`/products/${id}`);
     },
+    // deleteProduct(id) {
+    //   axios.delete(`/api/products/${id}`).then(response => {
+    //     this.products = this.products.filter(product => product.id !== id);
+    //   }).catch(error => {
+    //     console.error('There was an error deleting the product:', error);
+    //   });
+    // },
     deleteProduct(id) {
-      axios.delete(`/api/products/${id}`).then(response => {
-        this.products = this.products.filter(product => product.id !== id);
-      }).catch(error => {
-        console.error('There was an error deleting the product:', error);
+      this.$swal({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete(`/api/products/${id}`)
+            .then(response => {
+              this.products = this.products.filter(product => product.id !== id);
+              this.$swal(
+                'Deleted!',
+                'Your product has been deleted.',
+                'success'
+              );
+            })
+            .catch(error => {
+              console.error('There was an error deleting the product:', error);
+              this.$swal(
+                'Error!',
+                'There was an error deleting the product.',
+                'error'
+              );
+            });
+        }
       });
     },
+
     // getimagename(image)
     // {
     //   if(image == '' || image === null){
@@ -95,10 +127,12 @@ export default {
 .container {
   max-width: 800px;
 }
+
 .container {
   max-width: 800px;
 }
-.mgn{
-  margin-right:  10px;
+
+.mgn {
+  margin-right: 10px;
 }
 </style>

@@ -83,6 +83,11 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
         });
+        this.$swal({
+          title: 'Success',
+          text: 'product added successfully!.',
+          icon: 'success',
+        });
         Inertia.visit('/manage-product');
       } catch (error) {
         console.error('There was an error creating the product:', error);

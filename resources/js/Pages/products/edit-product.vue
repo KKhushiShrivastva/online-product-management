@@ -116,6 +116,11 @@ export default {
       },
     })
     .then((response) => {
+      this.$swal({
+          title: 'Success',
+          text: 'Product Updated Successfully!.',
+          icon: 'success',
+        });           
       Inertia.visit('/manage-product');
     })
     .catch((error) => {

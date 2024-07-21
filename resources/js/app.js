@@ -5,14 +5,16 @@ import '../css/app.css';
 // Import Bootstrap CSS and JS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
+import { InertiaProgress } from '@inertiajs/progress';          
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import router from './router'; 
+import VueSweetalert2 from 'vue-sweetalert2';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -23,6 +25,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
            .use(router) 
             .use(plugin)
+            .use(VueSweetalert2)
             .use(ZiggyVue)
             .mount(el);
     },
@@ -30,7 +33,7 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
-
+InertiaProgress.init();         
 
 
 // import { createApp, h } from 'vue';
